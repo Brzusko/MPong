@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Lobby.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ChatForm.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/ChatContainer.gd" type="Script" id=3]
+
+[node name="Lobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="."]
+margin_right = 1021.0
+margin_bottom = 606.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChatForm" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.003
+margin_left = 2.0
+margin_top = -38.0
+margin_right = 1022.0
+margin_bottom = 0.200012
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InputField" type="LineEdit" parent="ChatForm"]
+margin_right = 973.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="SendButton" type="Button" parent="ChatForm"]
+margin_left = 977.0
+margin_right = 1020.0
+margin_bottom = 40.0
+text = "Send"
+
+[node name="ChatContainer" type="PanelContainer" parent="."]
+margin_left = 2.0
+margin_top = 320.0
+margin_right = 1020.0
+margin_bottom = 562.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chat" type="RichTextLabel" parent="ChatContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1011.0
+margin_bottom = 235.0
+
+[node name="PlayerList" type="VBoxContainer" parent="."]
+margin_right = 201.0
+margin_bottom = 319.0
+
+[node name="MainButtons" type="VBoxContainer" parent="."]
+margin_left = 911.439
+margin_top = 22.4492
+margin_right = 994.439
+margin_bottom = 74.4492
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="MainButtons"]
+margin_right = 83.0
+margin_bottom = 20.0
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="MainButtons"]
+margin_top = 24.0
+margin_right = 83.0
+margin_bottom = 28.0
+
+[node name="Back" type="Button" parent="MainButtons"]
+margin_top = 32.0
+margin_right = 83.0
+margin_bottom = 52.0
+text = "Back"
+[connection signal="pressed" from="ChatForm/SendButton" to="ChatForm" method="_on_SendButton_pressed"]
+[connection signal="pressed" from="MainButtons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MainButtons/Back" to="." method="_on_Back_pressed"]

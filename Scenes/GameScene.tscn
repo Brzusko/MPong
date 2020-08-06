@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/GameScene.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/ScoreArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/ScoresContainer.gd" type="Script" id=4]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Master" type="Position2D" parent="."]
+position = Vector2( 92.692, 291.568 )
+
+[node name="Slave" type="Position2D" parent="."]
+position = Vector2( 924.247, 303.403 )
+
+[node name="Ball" type="Position2D" parent="."]
+position = Vector2( 519.087, 291.042 )
+
+[node name="GameStart" type="Timer" parent="."]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( -30.2381, 283.482 )
+scale = Vector2( 1, 10.8 )
+normal = Vector2( 2, 0 )
+
+[node name="Wall2" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 501.448, 585.863 )
+scale = Vector2( 18.36, 1 )
+normal = Vector2( 0, -2 )
+
+[node name="Wall3" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 1054.55, 293.561 )
+scale = Vector2( 1, 10.8 )
+normal = Vector2( -2, 0 )
+
+[node name="Wall4" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 497.668, -6.29962 )
+scale = Vector2( 18.6, 1 )
+normal = Vector2( 0, 2 )
+
+[node name="ScoresArea" type="Node2D" parent="."]
+
+[node name="Left" parent="ScoresArea" instance=ExtResource( 3 )]
+position = Vector2( 23, 290 )
+scale = Vector2( 1.92, 26.2 )
+which_player = 1
+
+[node name="Right" parent="ScoresArea" instance=ExtResource( 3 )]
+position = Vector2( 998.205, 290.04 )
+scale = Vector2( 1.92, 26.2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoresContainer" type="CenterContainer" parent="CanvasLayer"]
+margin_left = 274.242
+margin_top = 26.2599
+margin_right = 757.242
+margin_bottom = 206.26
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerScores" type="HBoxContainer" parent="CanvasLayer/ScoresContainer"]
+margin_left = 129.0
+margin_top = 83.0
+margin_right = 353.0
+margin_bottom = 97.0
+
+[node name="Player_Left" type="Label" parent="CanvasLayer/ScoresContainer/PlayerScores"]
+margin_right = 106.0
+margin_bottom = 14.0
+text = "Player 1 Score: 0"
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/ScoresContainer/PlayerScores"]
+margin_left = 110.0
+margin_right = 114.0
+margin_bottom = 14.0
+
+[node name="Player_Right" type="Label" parent="CanvasLayer/ScoresContainer/PlayerScores"]
+margin_left = 118.0
+margin_right = 224.0
+margin_bottom = 14.0
+text = "Player 2 Score: 0"
+[connection signal="score_reached" from="." to="CanvasLayer/ScoresContainer" method="_on_GameScene_score_reached"]
+[connection signal="timeout" from="GameStart" to="." method="_on_GameStart_timeout"]
+[connection signal="player_score" from="ScoresArea/Left" to="." method="_on_Left_player_score"]
+[connection signal="player_score" from="ScoresArea/Right" to="." method="_on_Right_player_score"]

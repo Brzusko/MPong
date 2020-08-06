@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ServerList/ServerList.gd" type="Script" id=1]
+[ext_resource path="res://ServerList/ItemList.gd" type="Script" id=2]
+
+[node name="ServerList" type="WindowDialog"]
+anchor_right = 0.889
+anchor_bottom = 0.772
+margin_right = -0.33606
+margin_bottom = -0.200012
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="API_GETTER" type="HTTPRequest" parent="."]
+
+[node name="ItemContainer" type="PanelContainer" parent="."]
+margin_right = 908.0
+margin_bottom = 413.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Servers" type="ItemList" parent="ItemContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 901.0
+margin_bottom = 406.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+
+[node name="ButtonContainer" type="CenterContainer" parent="."]
+anchor_right = 0.983
+anchor_bottom = 0.866
+margin_left = 1.0
+margin_top = 414.0
+margin_right = 12.47
+margin_bottom = 59.042
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wrapper" type="HBoxContainer" parent="ButtonContainer"]
+margin_left = 388.0
+margin_top = 13.0
+margin_right = 516.0
+margin_bottom = 33.0
+
+[node name="Connect" type="Button" parent="ButtonContainer/Wrapper"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Connect"
+
+[node name="Refresh" type="Button" parent="ButtonContainer/Wrapper"]
+margin_left = 68.0
+margin_right = 128.0
+margin_bottom = 20.0
+text = "Refresh"
+[connection signal="fetched_servers" from="." to="ItemContainer/Servers" method="_on_ServerList_fetched_servers"]
+[connection signal="request_completed" from="API_GETTER" to="." method="_on_API_GETTER_request_completed"]
+[connection signal="item_selected" from="ItemContainer/Servers" to="ItemContainer/Servers" method="_on_Servers_item_selected"]
+[connection signal="pressed" from="ButtonContainer/Wrapper/Connect" to="ItemContainer/Servers" method="_on_Connect_pressed"]
+[connection signal="pressed" from="ButtonContainer/Wrapper/Refresh" to="." method="_on_Refresh_pressed"]

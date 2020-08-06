@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Settings.gd" type="Script" id=1]
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = -0.032
+anchor_right = 1.0
+margin_top = 19.2
+margin_right = -2.0
+margin_bottom = 603.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 437.0
+margin_top = 241.0
+margin_right = 584.0
+margin_bottom = 361.0
+
+[node name="Master" type="Label" parent="CenterContainer/MainContainer"]
+margin_right = 147.0
+margin_bottom = 14.0
+text = "Master server settings:"
+
+[node name="Address" type="LineEdit" parent="CenterContainer/MainContainer"]
+margin_top = 18.0
+margin_right = 147.0
+margin_bottom = 42.0
+placeholder_text = "http://127.0.0.1:5000"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MainContainer"]
+margin_top = 46.0
+margin_right = 147.0
+margin_bottom = 50.0
+
+[node name="Player" type="Label" parent="CenterContainer/MainContainer"]
+margin_top = 54.0
+margin_right = 147.0
+margin_bottom = 68.0
+text = "Player Settings:"
+
+[node name="PlayerName" type="LineEdit" parent="CenterContainer/MainContainer"]
+margin_top = 72.0
+margin_right = 147.0
+margin_bottom = 96.0
+placeholder_text = "Player Name"
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/MainContainer"]
+margin_top = 100.0
+margin_right = 147.0
+margin_bottom = 120.0
+
+[node name="Save" type="Button" parent="CenterContainer/MainContainer/Buttons"]
+margin_right = 71.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="Back" type="Button" parent="CenterContainer/MainContainer/Buttons"]
+margin_left = 75.0
+margin_right = 147.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Back"
+[connection signal="pressed" from="CenterContainer/MainContainer/Buttons/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="CenterContainer/MainContainer/Buttons/Back" to="." method="_on_Back_pressed"]
